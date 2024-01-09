@@ -1,0 +1,4 @@
+{
+    "deleteBoxField": ":nth-child(2) > .form-page-group__main > .frm-wrapper > .frm",
+    "deleteButton":".layout-row-end > .btn-service"
+}

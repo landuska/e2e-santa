@@ -4,7 +4,9 @@
   "description": "",
   "main": "cypress.config.js",
   "scripts": {
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "santa": "npm run cy:run -- --spec 'cypress/e2e/santa-box-create.cy.jss'"
   },
   "author": "",
   "license": "ISC",

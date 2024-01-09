@@ -5,6 +5,10 @@ const dashboardPage = require("../fixtures/pages/dashboardPage.json");
 const invitePage = require("../fixtures/pages/invitePage.json");
 const inviteeBoxPage = require("../fixtures/pages/inviteeBoxPage.json");
 const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.json");
+const loginPage = require("../fixtures/pages/loginPage.json");
+const boxesPage = require("../fixtures/pages/boxesPage.json");
+const deletePage = require("../fixtures/pages/deletePage.json");
+
 import { faker } from "@faker-js/faker";
 
 describe("user can create a box and run it", () => {
@@ -36,11 +40,11 @@ describe("user can create a box and run it", () => {
     cy.get(boxPage.giftPriceToggle).check({ force: true });
     cy.get(boxPage.maxAnount).type(maxAmount);
     cy.get(boxPage.currency).select(currency);
-    cy.get(generalElements.arrowRight).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(generalElements.arrowRight).click();
+    cy.get(generalElements.arrowRight).click({ force: true });
+    cy.get(generalElements.arrowRight).click({ force: true });
+    cy.get(generalElements.arrowRight).click({ force: true });
     cy.get(dashboardPage.createdBoxName).should("have.text", newBoxName);
-    cy.get(".layout-1__header-wrapper-fixed .toggle-menu-item span")
+    cy.get('[class="toggle-menu"]')
       .invoke("text")
       .then((text) => {
         expect(text).to.include("Участники");
@@ -82,15 +86,11 @@ describe("user can create a box and run it", () => {
     cy.login(users.userAutor.email, users.userAutor.password);
     cy.get(
       '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item > .header-item__text > .txt--med'
-    ).click();
-    cy.get(":nth-child(1) > a.base--clickable > .user-card").first().click();
-    cy.get(
-      ".layout-1__header-wrapper-fixed > .layout-1__header-secondary > .header-secondary > .header-secondary__right-item > .toggle-menu-wrapper > .toggle-menu-button > .toggle-menu-button--inner"
-    ).click();
+    ).click({ force: true });
+    cy.contains(newBoxName).click({ force: true });
+    cy.get(boxesPage.navMenu).last().click({ force: true });
     cy.contains("Архивация и удаление").click({ force: true });
-    cy.get(":nth-child(2) > .form-page-group__main > .frm-wrapper > .frm").type(
-      "Удалить коробку"
-    );
-    cy.get(".btn-service").click();
+    cy.get(deletePage.deleteBoxField).type("Удалить коробку");
+    cy.get(deletePage.deleteButton).click({ force: true });
   });
 });

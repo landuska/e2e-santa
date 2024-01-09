@@ -1,22 +1,22 @@
 {
   "userAutor": {
-    "email": "ommelnikova+test@gmail.com",
-    "password": "test1234",
-    "name": "oksana-autor"
+    "email": "landysh.kh+test@gmail.com",
+    "password": "UR6055",
+    "name": "landysh-autor"
   },
   "user1": {
-    "email": "ommelnikova+test1@gmail.com",
-    "password": "test1234",
-    "name": "oksana1"
+    "email": "landysh.kh+test1@gmail.com",
+    "password": "EE0122",
+    "name": "landysh1"
   },
   "user2": {
-    "email": "ommelnikova+test2@gmail.com",
-    "password": "test1234",
-    "name": "oksana2"
+    "email": "landysh.kh+test2@gmail.com",
+    "password": "OG7237",
+    "name": "landysh2"
   },
   "user3": {
-    "email": "ommelnikova+test3@gmail.com",
-    "password": "test1234",
-    "name": "oksana3"
+    "email": "landysh.kh+test3@gmail.com",
+    "password": "QM1552",
+    "name": "landysh3"
   }
 }
