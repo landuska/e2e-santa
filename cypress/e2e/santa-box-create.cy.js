@@ -24,14 +24,15 @@ describe("user can create a box and run it", () => {
   //пользователь 1 логинится
   //пользователь 1 запускает жеребьевку
   let newBoxName = faker.word.noun({ length: { min: 5, max: 10 } });
-  let wishes = faker.word.noun() + faker.word.adverb() + faker.word.adjective();
+  let userWishes =
+    faker.word.noun() + faker.word.adverb() + faker.word.adjective();
   let maxAmount = 50;
   let currency = "Евро";
   let inviteLink;
 
   it("user logins and create a box", () => {
     cy.visit("/login");
-    cy.login(users.userAutor.email, users.userAutor.password);
+    cy.userLogin(users.userAutor.email, users.userAutor.password);
     cy.contains("Создать коробку").click();
     cy.get(boxPage.boxNameField).type(newBoxName);
     cy.get(generalElements.arrowRight).click();
@@ -40,9 +41,9 @@ describe("user can create a box and run it", () => {
     cy.get(boxPage.giftPriceToggle).check({ force: true });
     cy.get(boxPage.maxAnount).type(maxAmount);
     cy.get(boxPage.currency).select(currency);
-    cy.get(generalElements.arrowRight).click({ force: true });
-    cy.get(generalElements.arrowRight).click({ force: true });
-    cy.get(generalElements.arrowRight).click({ force: true });
+    cy.get(generalElements.arrowRight).click();
+    cy.get(generalElements.arrowRight).click();
+
     cy.get(dashboardPage.createdBoxName).should("have.text", newBoxName);
     cy.get('[class="toggle-menu"]')
       .invoke("text")
@@ -53,26 +54,37 @@ describe("user can create a box and run it", () => {
       });
   });
 
-  it("add participants", () => {
-    cy.get(generalElements.submitButton).click();
+  it("add participants per link", () => {
+    cy.get(generalElements.submitButton).click({ force: true });
     cy.get(invitePage.inviteLink)
       .invoke("text")
       .then((link) => {
         inviteLink = link;
       });
+  });
+
+  it("add participants per table", () => {
+    cy.get(invitePage.invitedUserNameFieldFirst).type(users.user2.name);
+    cy.get(invitePage.invitedUserEmailFieldFirst).type(users.user2.email);
+    cy.get(invitePage.invitedUserNameFieldSekond).type(users.user3.name);
+    cy.get(invitePage.invitedUserEmailFieldSekond).type(users.user3.email);
+    cy.get(invitePage.button).click({ force: true });
+    cy.get(invitePage.messageField)
+      .invoke("text")
+      .should(
+        "include",
+        "Карточки участников успешно созданы и приглашения уже отправляются."
+      );
     cy.clearCookies();
   });
+
   it("approve as user1", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click();
     cy.contains("войдите").click();
-    cy.login(users.user1.email, users.user1.password);
+    cy.userLogin(users.user1.email, users.user1.password);
     cy.contains("Создать карточку участника").should("exist");
-    cy.get(generalElements.submitButton).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(generalElements.arrowRight).click();
-    cy.get(inviteeBoxPage.wishesInput).type(wishes);
-    cy.get(generalElements.arrowRight).click();
+    cy.creatingUsersCard(userWishes);
     cy.get(inviteeDashboardPage.noticeForInvitee)
       .invoke("text")
       .then((text) => {
@@ -81,16 +93,52 @@ describe("user can create a box and run it", () => {
     cy.clearCookies();
   });
 
-  after("delete box", () => {
+  it("approve as user2", () => {
     cy.visit("/login");
-    cy.login(users.userAutor.email, users.userAutor.password);
+    cy.userLogin(users.user2.email, users.user2.password);
     cy.get(
-      '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item > .header-item__text > .txt--med'
-    ).click({ force: true });
+      '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item'
+    ).click();
     cy.contains(newBoxName).click({ force: true });
-    cy.get(boxesPage.navMenu).last().click({ force: true });
-    cy.contains("Архивация и удаление").click({ force: true });
-    cy.get(deletePage.deleteBoxField).type("Удалить коробку");
-    cy.get(deletePage.deleteButton).click({ force: true });
+    cy.get(inviteeDashboardPage.inviteCard).click({ force: true });
+    cy.creatingUsersCard(userWishes);
+    cy.get(inviteeDashboardPage.noticeForInvitee)
+      .invoke("text")
+      .then((text) => {
+        expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
+      });
+    cy.clearCookies();
   });
+
+  it("approve as user3", () => {
+    cy.visit("/login");
+    cy.userLogin(users.user3.email, users.user3.password);
+    cy.get(
+      '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item'
+    ).click();
+    cy.contains(newBoxName).click({ force: true });
+    cy.get(inviteeDashboardPage.inviteCard).click({ force: true });
+    cy.creatingUsersCard(userWishes);
+    cy.get(inviteeDashboardPage.noticeForInvitee)
+      .invoke("text")
+      .then((text) => {
+        expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
+      });
+    cy.clearCookies();
+  });
+
+  it("drawing", () => {});
+
+  // after("delete box", () => {
+  //   cy.visit("/login");
+  //   cy.userLogin(users.userAutor.email, users.userAutor.password);
+  //   cy.get(
+  //     '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item > .header-item__text > .txt--med'
+  //   ).click({ force: true });
+  //   cy.contains(newBoxName).click({ force: true });
+  //   cy.get(boxesPage.navMenu).last().click({ force: true });
+  //   cy.contains("Архивация и удаление").click({ force: true });
+  //   cy.get(deletePage.deleteBoxField).type("Удалить коробку");
+  //   cy.get(deletePage.deleteButton).click({ force: true });
+  // });
 });
