@@ -8,6 +8,7 @@ const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.jso
 const loginPage = require("../fixtures/pages/loginPage.json");
 const boxesPage = require("../fixtures/pages/boxesPage.json");
 const deletePage = require("../fixtures/pages/deletePage.json");
+const drawingPage = require("../fixtures/pages/drawing.json");
 
 import { faker } from "@faker-js/faker";
 
@@ -127,7 +128,22 @@ describe("user can create a box and run it", () => {
     cy.clearCookies();
   });
 
-  it("drawing", () => {});
+  it("drawing", () => {
+    cy.visit("/login");
+    cy.userLogin(users.userAutor.email, users.userAutor.password);
+    cy.get(
+      '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item'
+    ).click();
+    cy.contains(newBoxName).click({ force: true });
+    cy.get(drawingPage.drawingSubmitLink).click({ force: true });
+    cy.get(drawingPage.drawingSubmitButton).click();
+    cy.get(drawingPage.secondSubmitButton).click();
+    cy.get(drawingPage.notice)
+      .invoke("text")
+      .then((text) => {
+        expect(text).to.contain("Жеребьевка проведена");
+      });
+  });
 
   // after("delete box", () => {
   //   cy.visit("/login");
