@@ -1,5 +1,5 @@
 {
-    "notice":"cy.get('.picture-notice__title')",
+    "notice":".picture-notice__title",
     "drawingSubmitLink":"a > .txt-secondary--med",
     "drawingSubmitButton":".heading__right > .btn-main",
     "secondSubmitButton":".santa-modal_content_buttons > .btn-main"

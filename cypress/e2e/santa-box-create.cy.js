@@ -3,11 +3,7 @@ const boxPage = require("../fixtures/pages/boxPage.json");
 const generalElements = require("../fixtures/pages/general.json");
 const dashboardPage = require("../fixtures/pages/dashboardPage.json");
 const invitePage = require("../fixtures/pages/invitePage.json");
-const inviteeBoxPage = require("../fixtures/pages/inviteeBoxPage.json");
 const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.json");
-const loginPage = require("../fixtures/pages/loginPage.json");
-const boxesPage = require("../fixtures/pages/boxesPage.json");
-const deletePage = require("../fixtures/pages/deletePage.json");
 const drawingPage = require("../fixtures/pages/drawing.json");
 
 import { faker } from "@faker-js/faker";
@@ -30,12 +26,24 @@ describe("user can create a box and run it", () => {
   let maxAmount = 50;
   let currency = "Евро";
   let inviteLink;
+  let boxID;
 
   it("user logins and create a box", () => {
     cy.visit("/login");
     cy.userLogin(users.userAutor.email, users.userAutor.password);
+
     cy.contains("Создать коробку").click();
     cy.get(boxPage.boxNameField).type(newBoxName);
+    cy.get(":nth-child(3) > .frm")
+      .invoke("val")
+      .should("not.be.null")
+      .should("not.be.undefined")
+      .should("not.be.empty")
+      .then((ID) => {
+        boxID = ID;
+        cy.log("Box ID:", boxID);
+      });
+    cy.log(boxID);
     cy.get(generalElements.arrowRight).click();
     cy.get(boxPage.sixthIcon).click();
     cy.get(generalElements.arrowRight).click();
@@ -59,7 +67,10 @@ describe("user can create a box and run it", () => {
     cy.get(generalElements.submitButton).click({ force: true });
     cy.get(invitePage.inviteLink)
       .invoke("text")
+      .should("not.be.null")
+      .should("not.be.undefined")
       .then((link) => {
+        cy.log("Link:", link);
         inviteLink = link;
       });
   });
@@ -145,16 +156,17 @@ describe("user can create a box and run it", () => {
       });
   });
 
-  // after("delete box", () => {
-  //   cy.visit("/login");
-  //   cy.userLogin(users.userAutor.email, users.userAutor.password);
-  //   cy.get(
-  //     '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item > .header-item__text > .txt--med'
-  //   ).click({ force: true });
-  //   cy.contains(newBoxName).click({ force: true });
-  //   cy.get(boxesPage.navMenu).last().click({ force: true });
-  //   cy.contains("Архивация и удаление").click({ force: true });
-  //   cy.get(deletePage.deleteBoxField).type("Удалить коробку");
-  //   cy.get(deletePage.deleteButton).click({ force: true });
-  // });
+  after("Delete_box", () => {
+    cy.request({
+      method: "DELETE",
+      headers: {
+        Cookie:
+          "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY1MjE0ODAsImlhdCI6MTcwNTE2Nzg2OCwiZXhwIjoxNzA3NzU5ODY4fQ.8mM0oGz8e7m9prmsF1AcQ9SWI-gXtVC6roxg2iesyZc; Max-Age=2592000; Path=/; Expires=Mon, 12 Feb 2024 17:44:28 GMT; HttpOnly",
+      },
+      url: "https://santa-secret.ru/api/box/" + boxID,
+    }).then((response) => {
+      expect(response.status).to.equal(200);
+    });
+    cy.log("ready!");
+  });
 });
