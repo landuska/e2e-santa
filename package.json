@@ -6,16 +6,27 @@
   "scripts": {
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "santa": "npm run cy:run -- --spec 'cypress/e2e/santa-box-create.cy.jss'"
+    "cy:santa": "npm run cy:run -- --spec 'cypress/e2e/santa-box-create.cy.jss'",
+    "cy:cloud": "cypress run --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
+    "cy:spec2": "cypress run -- --spec 'cypress/e2e/test2/creatingBox2.feature' --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
+    "cy:spec1": "cypress run -- --spec 'cypress/e2e/test/creatingBox.feature' --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
+    "cy:nokey:spec2": "cypress run --spec 'cypress/e2e/test2/creatingBox2.feature'",
+    "cy:nokey:spec1": "cypress run --spec 'cypress/e2e/test/creatingBox.feature'",
+    "cy:nokey:laptop": "cypress run --config-file cypress.config.js --spec 'cypress/e2e/test/creatingBox.feature'",
+    "cy:nokey:monitor": "cypress run --config-file cypress.config2.js --spec 'cypress/e2e/test2/creatingBox2.feature'",
+    "cy:laptop": "cypress run --config-file cypress.config.js --spec 'cypress/e2e/test/creatingBox.feature' --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
+    "cy:monitor": "cypress run --config-file cypress.config2.js --spec 'cypress/e2e/test2/creatingBox2.feature' --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
+    "cy:parallel": "concurrently \"npm run cy:laptop -- --group chrom --ci-build-id 18 --parallel\" \"npm run cy:monitor -- --group electron --ci-build-id 18 --parallel\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^20.0.1",
-    "@faker-js/faker": "^7.6.0",
-    "cypress": "^13.6.2"
+    "@faker-js/faker": "^7.6.0"
   },
   "devDependencies": {
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0"
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "concurrently": "^8.2.2",
+    "cypress": "^13.6.3"
   }
 }

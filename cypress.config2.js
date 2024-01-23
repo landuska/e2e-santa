@@ -14,9 +14,9 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: "https://santa-secret.ru",
     specPattern: "**/*.feature",
-    browser: "chrome",
-    viewportWidth: 1280,
-    viewportHeight: 800,
+    browser: "electron",
+    viewportWidth: 1920,
+    viewportHeight: 1080,
     testIsolation: false,
     setupNodeEvents(on, config) {
       const bundler = createBundler({

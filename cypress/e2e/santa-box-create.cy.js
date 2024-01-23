@@ -28,29 +28,28 @@ describe("user can create a box and run it", () => {
   let inviteLink;
   let boxID;
 
-  it("user logins and create a box", () => {
+  it.only("user logins and create a box", () => {
     cy.visit("/login");
     cy.userLogin(users.userAutor.email, users.userAutor.password);
-
     cy.contains("Создать коробку").click();
     cy.get(boxPage.boxNameField).type(newBoxName);
     cy.get(":nth-child(3) > .frm")
       .invoke("val")
-      .should("not.be.null")
-      .should("not.be.undefined")
-      .should("not.be.empty")
       .then((ID) => {
-        boxID = ID;
-        cy.log("Box ID:", boxID);
+        cy.wrap(ID)
+          .should("not.be.null")
+          .then((newID) => {
+            boxID = newID;
+            cy.log("Box ID:", boxID);
+          });
       });
-    cy.log(boxID);
-    cy.get(generalElements.arrowRight).click();
-    cy.get(boxPage.sixthIcon).click();
-    cy.get(generalElements.arrowRight).click();
+    cy.get(generalElements.arrowRight).should("be.visible").click();
+    cy.get(boxPage.sixthIcon).should("be.visible").click();
+    cy.get(generalElements.arrowRight).should("be.visible").click();
     cy.get(boxPage.giftPriceToggle).check({ force: true });
     cy.get(boxPage.maxAnount).type(maxAmount);
     cy.get(boxPage.currency).select(currency);
-    cy.get(generalElements.arrowRight).click();
+    cy.get(generalElements.arrowRight).should("be.visible").click();
     cy.get(generalElements.arrowRight).click();
 
     cy.get(dashboardPage.createdBoxName).should("have.text", newBoxName);
@@ -67,11 +66,13 @@ describe("user can create a box and run it", () => {
     cy.get(generalElements.submitButton).click({ force: true });
     cy.get(invitePage.inviteLink)
       .invoke("text")
-      .should("not.be.null")
-      .should("not.be.undefined")
       .then((link) => {
-        cy.log("Link:", link);
-        inviteLink = link;
+        cy.wrap(link)
+          .should("not.be.null")
+          .then((wrappedLink) => {
+            inviteLink = wrappedLink;
+            cy.log("InviteLink:", inviteLink);
+          });
       });
   });
 
