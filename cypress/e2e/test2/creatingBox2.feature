@@ -1,7 +1,7 @@
 Feature: user creats a box, invites another users
 
     Scenario: user logs in and create a box
-        Given user logs in as "landysh.kh+test1@gmail.com" and "PD3429"
+        Given user logs in as "landysh.kh+test@gmail.com" and "TS1542"
         When user creates a box
         Then box is created successfully
 
@@ -16,4 +16,4 @@ Feature: user creats a box, invites another users
         Then card is created successfully
 
     Scenario: deleting a box
-        Given box is deleted per API DELETE
+        Given box is deleted per API DELETE request

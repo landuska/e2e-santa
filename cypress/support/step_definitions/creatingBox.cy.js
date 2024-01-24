@@ -160,16 +160,3 @@ Given("box is deleted per API DELETE request", function () {
     expect(response.status).to.equal(200);
   });
 });
-
-Given("box is deleted per API DELETE", function () {
-  cy.request({
-    method: "DELETE",
-    headers: {
-      Cookie:
-        "_ym_uid=1702923807421528493; _ym_d=1702923807; adrcid=AvoLPeohuZIYV6W4JovRmCg; __upin=4lKJSQVLKE1k+tmkONKqyQ; adtech_uid=71308145-ce77-4f3d-90da-b7e7f47f643b%3Asanta-secret.ru; top100_id=t1.7627570.1967651905.1705339338173; last_visit=1705335738180%3A%3A1705339338180; t3_sid_7627570=s1.208998930.1705339338176.1705339338391.1.2; fid=821c8205-b216-4a4d-a018-aff042493ad8; _ac_oid=903ea2aab79e500552b5d91d09f24294%3A1705342939269; _ym_isad=2; lang=ru; _buzz_fpc=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zYW50YS1zZWNyZXQucnUlMjIlMkMlMjJleHBpcmVzJTIyJTNBJTIyVGh1JTJDJTIwMjMlMjBKYW4lMjAyMDI1JTIwMTElM0EyMyUzQTAxJTIwR01UJTIyJTJDJTIyU2FtZVNpdGUlMjIlM0ElMjJMYXglMjIlMkMlMjJ2YWx1ZSUyMiUzQSUyMiU3QiU1QyUyMnVmcCU1QyUyMiUzQSU1QyUyMjAxMDc2ZWYzOTliMDVjMWZmZWYyOWMyZmFiMWI0Mzc0JTVDJTIyJTJDJTVDJTIyYnJvd3NlclZlcnNpb24lNUMlMjIlM0ElNUMlMjIxMjAuMCU1QyUyMiU3RCUyMiU3RA==; _buzz_aidata=JTdCJTIycGF0aCUyMiUzQSUyMiUyRiUyMiUyQyUyMmRvbWFpbiUyMiUzQSUyMi5zYW50YS1zZWNyZXQucnUlMjIlMkMlMjJleHBpcmVzJTIyJTNBJTIyVGh1JTJDJTIwMjMlMjBKYW4lMjAyMDI1JTIwMTElM0EyMyUzQTAxJTIwR01UJTIyJTJDJTIyU2FtZVNpdGUlMjIlM0ElMjJMYXglMjIlMkMlMjJ2YWx1ZSUyMiUzQSUyMiU3QiU1QyUyMnVmcCU1QyUyMiUzQSU1QyUyMjRsS0pTUVZMS0UxayUyQnRta09OS3F5USU1QyUyMiUyQyU1QyUyMmJyb3dzZXJWZXJzaW9uJTVDJTIyJTNBJTVDJTIyMTIwLjAlNUMlMjIlN0QlMjIlN0Q=; jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY1MjE0ODIsImlhdCI6MTcwNjAxMDcxNywiZXhwIjoxNzA4NjAyNzE3fQ.Ca16BGBF9BHkMSz_ByLAlATH-bv3-8HEDUv9mEsC44g",
-    },
-    url: "https://santa-secret.ru/api/box/" + boxID,
-  }).then((response) => {
-    expect(response.status).to.equal(200);
-  });
-});

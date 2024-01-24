@@ -14,9 +14,9 @@
     "cy:nokey:spec1": "cypress run --spec 'cypress/e2e/test/creatingBox.feature'",
     "cy:nokey:laptop": "cypress run --config-file cypress.config.js --spec 'cypress/e2e/test/creatingBox.feature'",
     "cy:nokey:monitor": "cypress run --config-file cypress.config2.js --spec 'cypress/e2e/test2/creatingBox2.feature'",
-    "cy:laptop": "cypress run --config-file cypress.config.js --spec 'cypress/e2e/test/creatingBox.feature' --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
-    "cy:monitor": "cypress run --config-file cypress.config2.js --spec 'cypress/e2e/test2/creatingBox2.feature' --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
-    "cy:parallel": "concurrently \"npm run cy:laptop -- --group chrom --ci-build-id 18 --parallel\" \"npm run cy:monitor -- --group electron --ci-build-id 18 --parallel\""
+    "cy:laptop": "cypress run --config-file cypress.config.js --spec cypress/e2e/test/creatingBox.feature --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d --group chrom --ci-build-id `${BUILD_ID}`",
+    "cy:monitor": "cypress run --config-file cypress.config2.js --spec cypress/e2e/test2/creatingBox2.feature --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d --group electron --ci-build-id `${BUILD_ID}`",
+    "cy:parallel": "npm-run-all --parallel cy:laptop cy:monitor"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "concurrently": "^8.2.2",
-    "cypress": "^13.6.3"
+    "cypress": "^13.6.3",
+    "npm-run-all": "^4.1.5"
   }
 }
