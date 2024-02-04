@@ -14,8 +14,8 @@
     "cy:nokey:spec1": "cypress run --spec 'cypress/e2e/test/creatingBox.feature'",
     "cy:nokey:laptop": "cypress run --config-file cypress.config.js --spec 'cypress/e2e/test/creatingBox.feature'",
     "cy:nokey:monitor": "cypress run --config-file cypress.config2.js --spec 'cypress/e2e/test2/creatingBox2.feature'",
-    "cy:laptop": "cypress run --config-file cypress.config.js --spec cypress/e2e/test/creatingBox.feature --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d --group chrom --ci-build-id `${BUILD_ID}`",
-    "cy:monitor": "cypress run --config-file cypress.config2.js --spec cypress/e2e/test2/creatingBox2.feature --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d --group electron --ci-build-id `${BUILD_ID}`",
+    "cy:laptop": "cypress run --config-file cypress.config.js --spec cypress/e2e/test/creatingBox.feature --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d --group laptop --ci-build-id ${BUILD_TAG}",
+    "cy:monitor": "cypress run --config-file cypress.config2.js --spec cypress/e2e/test2/creatingBox2.feature --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d --group monitors --ci-build-id ${BUILD_TAG}",
     "cy:parallel": "npm-run-all --parallel cy:laptop cy:monitor"
   },
   "author": "",

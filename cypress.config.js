@@ -7,6 +7,7 @@ const addCucumberPreprocessorPlugin =
 
 module.exports = defineConfig({
   projectId: "rs368b",
+  chromeWebSecurity: false,
   video: false,
   record: true,
   parallel: true,
