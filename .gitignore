@@ -29,3 +29,11 @@ build/Release
 node_modules
 cypress/videos
 cypress/screenshots
+allure-report
+allure-results
+jenkins.war
+jenkins.war.bak
+jenkins.war.tmp
+credentials.json
+key.js
+

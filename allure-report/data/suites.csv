@@ -1,6 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Feb 06 18:02:01 CET 2024","Tue Feb 06 18:02:01 CET 2024","197","","user creats a box, invites another users","","","","deleting a box",""
-"failed","Tue Feb 06 18:01:48 CET 2024","Tue Feb 06 18:02:01 CET 2024","13128","","user creats a box, invites another users","","","","approve as invited user (per table) (example #2)",""
-"failed","Tue Feb 06 18:01:18 CET 2024","Tue Feb 06 18:01:37 CET 2024","18403","","user creats a box, invites another users","","","","user logs in and create a box",""
-"failed","Tue Feb 06 18:01:37 CET 2024","Tue Feb 06 18:01:37 CET 2024","312","","user creats a box, invites another users","","","","user adds participants",""
-"failed","Tue Feb 06 18:01:37 CET 2024","Tue Feb 06 18:01:48 CET 2024","10639","","user creats a box, invites another users","","","","approve as invited user (per table) (example #1)",""

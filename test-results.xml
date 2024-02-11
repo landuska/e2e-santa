@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="55.846" tests="5" failures="2">
+  <testsuite name="Root Suite" timestamp="2024-02-11T16:39:59" tests="0" file="cypress\e2e\test\creatingBox.feature" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="user creats a box, invites another users" timestamp="2024-02-11T16:39:59" tests="5" time="55.831" failures="2">
+    <testcase name="user creats a box, invites another users user logs in and create a box" time="0.000" classname="user logs in and create a box">
+      <failure message="Timed out retrying after 4050ms: `cy.click()` failed because the page updated while this command was executing. Cypress tried to locate elements based on this query:
+
+&gt; cy.get(.btn-arrow-right)
+
+We initially found matching element(s), but while waiting for them to become actionable, they disappeared from the page. Common situations why this happens:
+  - Your JS framework re-rendered asynchronously
+  - Your app code reacted to an event firing and removed the element
+
+You can typically solve this by breaking up a chain. For example, rewrite:
+
+&gt; `cy.get(&apos;button&apos;).click().click()`
+
+to
+
+&gt; `cy.get(&apos;button&apos;).as(&apos;btn&apos;).click()`
+&gt; `cy.get(&apos;@btn&apos;).click()`
+
+https://on.cypress.io/element-has-detached-from-dom" type="CypressError"><![CDATA[CypressError: Timed out retrying after 4050ms: `cy.click()` failed because the page updated while this command was executing. Cypress tried to locate elements based on this query:
+
+> cy.get(.btn-arrow-right)
+
+We initially found matching element(s), but while waiting for them to become actionable, they disappeared from the page. Common situations why this happens:
+  - Your JS framework re-rendered asynchronously
+  - Your app code reacted to an event firing and removed the element
+
+You can typically solve this by breaking up a chain. For example, rewrite:
+
+> `cy.get('button').click().click()`
+
+to
+
+> `cy.get('button').as('btn').click()`
+> `cy.get('@btn').click()`
+
+https://on.cypress.io/element-has-detached-from-dom
+    at retryActionability (https://santa-secret.ru/__cypress/runner/cypress_runner.js:133698:82)
+    at tryCatcher (https://santa-secret.ru/__cypress/runner/cypress_runner.js:11327:23)
+    at Promise.attempt.Promise.try (https://santa-secret.ru/__cypress/runner/cypress_runner.js:8601:29)
+    at whenStable (https://santa-secret.ru/__cypress/runner/cypress_runner.js:151463:65)
+    at <unknown> (https://santa-secret.ru/__cypress/runner/cypress_runner.js:150871:14)
+    at tryCatcher (https://santa-secret.ru/__cypress/runner/cypress_runner.js:11327:23)
+    at Promise._settlePromiseFromHandler (https://santa-secret.ru/__cypress/runner/cypress_runner.js:9262:31)
+    at Promise._settlePromise (https://santa-secret.ru/__cypress/runner/cypress_runner.js:9319:18)
+    at Promise._settlePromise0 (https://santa-secret.ru/__cypress/runner/cypress_runner.js:9364:10)
+    at Promise._settlePromises (https://santa-secret.ru/__cypress/runner/cypress_runner.js:9444:18)
+    at Promise._fulfill (https://santa-secret.ru/__cypress/runner/cypress_runner.js:9388:18)
+    at <unknown> (https://santa-secret.ru/__cypress/runner/cypress_runner.js:11002:46)
+From Your Spec Code:
+    at Context.eval (https://santa-secret.ru/__cypress/tests?p=cypress\e2e\test\creatingBox.feature:20762:44)
+    at Registry.runStepDefininition (https://santa-secret.ru/__cypress/tests?p=cypress\e2e\test\creatingBox.feature:8575:48)
+    at Object.fn (https://santa-secret.ru/__cypress/tests?p=cypress\e2e\test\creatingBox.feature:15040:43)
+    at runStepWithLogGroup (https://santa-secret.ru/__cypress/tests?p=cypress\e2e\test\creatingBox.feature:14658:29)
+    at Context.eval (https://santa-secret.ru/__cypress/tests?p=cypress\e2e\test\creatingBox.feature:15036:62)]]></failure>
+    </testcase>
+    <testcase name="user creats a box, invites another users user adds participants" time="5.063" classname="user adds participants">
+    </testcase>
+    <testcase name="user creats a box, invites another users approve as invited user (per table) (example #1)" time="25.140" classname="approve as invited user (per table) (example #1)">
+    </testcase>
+    <testcase name="user creats a box, invites another users approve as invited user (per table) (example #2)" time="0.000" classname="approve as invited user (per table) (example #2)">
+      <failure message="The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.
+
+  &gt; Cannot read properties of null (reading &apos;postMessage&apos;)
+
+When Cypress detects uncaught errors originating from your application it will automatically fail the current test.
+
+This behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.
+
+https://on.cypress.io/uncaught-exception-from-application" type="TypeError"><![CDATA[TypeError: The following error originated from your application code, not from Cypress. It was caused by an unhandled promise rejection.
+
+  > Cannot read properties of null (reading 'postMessage')
+
+When Cypress detects uncaught errors originating from your application it will automatically fail the current test.
+
+This behavior is configurable, and you can choose to turn this off by listening to the `uncaught:exception` event.
+
+https://on.cypress.io/uncaught-exception-from-application
+    at PrimaryOriginCommunicator.toSource (https://santa-secret.ru/__cypress/runner/cypress_runner.js:132885:12)
+    at PrimaryOriginCommunicator.<anonymous> (https://santa-secret.ru/__/assets/index.f5626447.js:106481:43)]]></failure>
+    </testcase>
+    <testcase name="user creats a box, invites another users deleting a box" time="0.470" classname="deleting a box">
+    </testcase>
+  </testsuite>
+</testsuites>

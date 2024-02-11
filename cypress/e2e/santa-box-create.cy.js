@@ -28,7 +28,7 @@ describe("user can create a box and run it", () => {
   let inviteLink;
   let boxID;
 
-  it.only("user logins and create a box", () => {
+  it("user logins and create a box", () => {
     cy.visit("/login");
     cy.userLogin(users.userAutor.email, users.userAutor.password);
     cy.contains("Создать коробку").click();

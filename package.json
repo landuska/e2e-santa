@@ -11,14 +11,16 @@
     "cy:spec2": "cypress run -- --spec 'cypress/e2e/test2/creatingBox2.feature' --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
     "cy:spec1": "cypress run -- --spec 'cypress/e2e/test/creatingBox.feature' --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d",
     "cy:nokey:spec2": "cypress run --spec 'cypress/e2e/test2/creatingBox2.feature'",
-    "cy:nokey:spec1": "cypress run --spec 'cypress/e2e/test/creatingBox.feature' --env allure=true",
+    "cy:nokey:spec1": "cypress run --spec 'cypress/e2e/test/creatingBox.feature'",
     "cy:nokey:laptop": "cypress run --config-file cypress.config.js --spec 'cypress/e2e/test/creatingBox.feature'",
     "cy:nokey:monitor": "cypress run --config-file cypress.config2.js --spec 'cypress/e2e/test2/creatingBox2.feature'",
     "cy:laptop": "cypress run --config-file cypress.config.js --spec cypress/e2e/test/creatingBox.feature --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d --group laptop --ci-build-id ${BUILD_TAG}",
     "cy:monitor": "cypress run --config-file cypress.config2.js --spec cypress/e2e/test2/creatingBox2.feature --record --key 40b31b68-6a0e-47c8-a287-f6460d41990d --group monitors --ci-build-id ${BUILD_TAG}",
     "cy:parallel": "npm-run-all --parallel cy:laptop cy:monitor",
-    "cy:allure:report": "cypress allure generate allure-results --clean -o allure-report",
-    "cy:allure-open":"cypress allure open allure-report"
+    "cy:allure:report": "cypress run --spec 'cypress/e2e/test/creatingBox.feature' --env allure=true && allure generate allure-results --clean -o allure-report",
+    "cy:allure-open": "allure open allure-report",
+    "test:mocha:report": "cypress run --spec 'cypress/e2e/test/creatingBox.feature' --reporter mocha-junit-reporter",
+    "jira-report": "curl -H \"Content-Type: text/xml\" -X POST -H \"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnQiOiJkM2E2NjA4NS02YWViLTM1NTAtOTdiMy03MDM5NTFhYWYxOGYiLCJhY2NvdW50SWQiOiI3MDEyMTpkNzc1ZGUxMi1hZWMyLTRiYzAtYjZlYS1lZDhiMDczODU1ZGEiLCJpc1hlYSI6ZmFsc2UsImlhdCI6MTcwNzY3Mjc2OCwiZXhwIjoxNzA3NzU5MTY4LCJhdWQiOiJBMjU5MTI4MkY1MUE0OEE0QTVCOTA0RDUwMDQ3QTgyNCIsImlzcyI6ImNvbS54cGFuZGl0LnBsdWdpbnMueHJheSIsInN1YiI6IkEyNTkxMjgyRjUxQTQ4QTRBNUI5MDRENTAwNDdBODI0In0.wRvzNX5Aks0POtXylAM0CHIF7D8C54q3vyn8pToWTRc\"  --data @\"C:/Users/Landy/Desktop/автоматизация/project/e2e-santa/test-results.xml\" https://xray.cloud.getxray.app/api/v2/import/execution/junit?testExecKey=JR-4"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +35,8 @@
     "allure-commandline": "^2.27.0",
     "allure-cucumberjs": "^2.12.0",
     "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "mocha-junit-reporter": "^2.2.1",
     "npm-run-all": "^4.1.5"
   }
 }
